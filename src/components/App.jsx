@@ -13,14 +13,19 @@ class App extends React.Component {
     ],
     filter: '',
   };
-  //   componentDidMount() {
 
-  // }
-  //   componentDidUpdate(prevProp, prevState) {
-  //     if (prevState.contacts !== this.state.contacts) {
-  //     localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
-  //   }
-  // }
+  componentDidMount() {
+    const contactsFromLS = JSON.parse(localStorage.getItem('contacts'));
+    if (contactsFromLS) {
+      this.setState({ contacts: contactsFromLS });
+    }
+  }
+
+  componentDidUpdate(prevProp, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
 
   formSubmitHandler = contact => {
     console.log(contact);
